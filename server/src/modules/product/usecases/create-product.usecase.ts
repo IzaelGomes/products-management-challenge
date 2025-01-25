@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
-import { ProductRepository } from '../repositories/user.repository';
+import { ProductRepository } from '../repositories/product.repository';
 
 type CreateProductUseCaseRequest = {
   name: string;

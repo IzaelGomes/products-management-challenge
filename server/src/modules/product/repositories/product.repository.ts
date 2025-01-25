@@ -8,9 +8,9 @@ export type Product = {
 };
 
 export abstract class ProductRepository {
-  abstract create(user: Product): Promise<void>;
+  abstract create(product: Product): Promise<void>;
   abstract findAll(): Promise<Product[]>;
   abstract findById(id: string): Promise<Product | null>;
-  abstract update(user: Product): Promise<void>;
+  abstract update(product: Product): Promise<void>;
   abstract deleteById(id: string): Promise<void>;
 }

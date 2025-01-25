@@ -1,4 +1,4 @@
-import { ProductRepository, Product } from './user.repository';
+import { ProductRepository, Product } from './product.repository';
 
 export class InMemoryProductRepository implements ProductRepository {
   private products: Product[] = [];

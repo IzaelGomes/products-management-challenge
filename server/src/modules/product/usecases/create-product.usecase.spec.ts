@@ -1,4 +1,4 @@
-import { InMemoryProductRepository } from '../repositories/user-repository-in.memory';
+import { InMemoryProductRepository } from '../repositories/product-repository-in.memory';
 import { CreateProductUseCase } from './create-product.usecase';
 
 describe('CreateProductUseCase', () => {
