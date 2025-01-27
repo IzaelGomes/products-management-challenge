@@ -8,7 +8,7 @@ describe('DeleteProductUseCase', () => {
   let deleteProducUseCase: DeleteProductUseCase;
   let productRepository: InMemoryProductRepository;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     productRepository = new InMemoryProductRepository();
     deleteProducUseCase = new DeleteProductUseCase(productRepository);
 
@@ -43,6 +43,6 @@ describe('DeleteProductUseCase', () => {
     await expect(deleteProducUseCase.execute(productId)).rejects.toEqual(
       new NotFoundException('Produto não encontrado.'),
     );
-    expect(products).toHaveLength(1);
+    expect(products).toHaveLength(2);
   });
 });

@@ -8,7 +8,7 @@ describe('UpdateProductUseCase', () => {
   let productRepository: InMemoryProductRepository;
   let updateProductUseCase: UpdateProductUseCase;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     productRepository = new InMemoryProductRepository();
     updateProductUseCase = new UpdateProductUseCase(productRepository);
     const createProductUseCase = new CreateProductUseCase(productRepository);
