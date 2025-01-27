@@ -5,6 +5,7 @@ import { DataBaseModule } from 'src/infra/database/database.module';
 import { GetAllProductsUseCase } from 'src/modules/product/usecases/get-all-products.usecase';
 import { GetProductUseCase } from 'src/modules/product/usecases/get-product.usecase';
 import { DeleteProductUseCase } from 'src/modules/product/usecases/delete-product.usecase';
+import { UpdateProductUseCase } from 'src/modules/product/usecases/update-product.usecase';
 
 @Module({
   controllers: [ProductController],
@@ -13,6 +14,7 @@ import { DeleteProductUseCase } from 'src/modules/product/usecases/delete-produc
     GetAllProductsUseCase,
     GetProductUseCase,
     DeleteProductUseCase,
+    UpdateProductUseCase,
   ],
   imports: [DataBaseModule],
 })
