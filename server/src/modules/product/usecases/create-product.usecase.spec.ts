@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import { InMemoryProductRepository } from '../repositories/product-repository-in.memory';
 import { CreateProductUseCase } from './create-product.usecase';
 
@@ -42,5 +43,17 @@ describe('CreateProductUseCase', () => {
     const allProducts = await productRepository.findAll();
     expect(allProducts[0].id).toBeDefined();
     expect(allProducts[0].id).toHaveLength(36); // UUID length has to be 36
+  });
+
+  it('should throw an error if invalid price is provided', async () => {
+    await expect(
+      createProductUseCase.execute({
+        name: 'Carro',
+        description: 'Carro preto semi novo',
+        price: -2,
+      }),
+    ).rejects.toThrow(
+      new BadRequestException('O preço deve ser maior que zero'),
+    );
   });
 });
