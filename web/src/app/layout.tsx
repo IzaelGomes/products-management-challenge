@@ -10,6 +10,7 @@ import {
   SignUpButton,
 } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +38,7 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="flex justify-end mb-5 p-3 w-[100%]">
+          <header className="flex justify-end bg-black mb-5 p-3 w-[100%]">
             <SignedIn>
               <UserButton />
             </SignedIn>
@@ -49,11 +50,13 @@ export default function RootLayout({
                 <SignUpButton>
                   <Button>Criar conta</Button>
                 </SignUpButton>
+
+                <Link href={"/products"}>Produtos</Link>
               </SignedOut>
             </div>
           </header>
 
-          <div className="m-auto max-w-screen-xl">{children}</div>
+          <div className="m-auto px-4 max-w-screen-xl">{children}</div>
         </body>
       </html>
     </ClerkProvider>
