@@ -1,9 +1,14 @@
 import { TProduct } from "./api";
 
-const baseUrl = process.env.API_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const getProducts = async () => {
-  const products = await fetch(`${baseUrl}/product`);
+  const products = await fetch(`${baseUrl}/product`, {
+    // revalidate tag for caching
+    next: {
+      tags: ["products"],
+    },
+  });
   const data = (await products.json()) as TProduct[];
 
   return data;

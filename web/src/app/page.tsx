@@ -1,8 +1,7 @@
-import { DataTable } from "@/components/ui/data-table";
-import { columns } from "./colums";
 import { PackageSearch } from "lucide-react";
-import { getProducts } from "@/services/product";
+import { getProducts } from "@/services/api/product";
 import { Input } from "@/components/ui/input";
+import { ProductTable } from "./product-table";
 
 export default async function Page() {
   const products = await getProducts();
@@ -18,9 +17,9 @@ export default async function Page() {
           type="text"
           className="mb-4 max-w-sm"
           placeholder="Buscar produto"
-          aria-label="Buscar Produto"
+          aria-label="Buscar produto"
         />
-        <DataTable columns={columns} data={products} />
+        <ProductTable data={products} />
       </div>
     </div>
   );

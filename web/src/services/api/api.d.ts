@@ -4,5 +4,5 @@ export type TProduct = {
   price: number;
   description: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
 };
