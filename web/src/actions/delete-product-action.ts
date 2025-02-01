@@ -1,7 +1,7 @@
 "use server";
 
 import { deleteProduct } from "@/services/api/product";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export async function deletePostAction(id: string) {
   try {
@@ -10,5 +10,5 @@ export async function deletePostAction(id: string) {
     console.log({ error });
   }
 
-  revalidatePath("products");
+  revalidateTag("products");
 }

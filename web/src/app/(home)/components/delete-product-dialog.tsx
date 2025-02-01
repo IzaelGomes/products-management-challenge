@@ -11,23 +11,21 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
 
 type DeleteProductDialogProps = {
-  id: string;
+  productId: string;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 };
 
-export default function DeleteProductDialog({ id }: DeleteProductDialogProps) {
-  const [isOpen, setIsOpen] = useState(false);
-
+export default function DeleteProductDialog({
+  productId,
+  isOpen,
+  onOpenChange,
+}: DeleteProductDialogProps) {
   return (
     <>
-      <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-        <div onClick={() => setIsOpen(true)}>Deletar</div>
-      </DropdownMenuItem>
-
-      <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+      <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
@@ -39,10 +37,10 @@ export default function DeleteProductDialog({ id }: DeleteProductDialogProps) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setIsOpen(false)}>
-              Cancel
-            </AlertDialogCancel>
-            <AlertDialogAction onClick={async () => await deletePostAction(id)}>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={async () => await deletePostAction(productId)}
+            >
               Continue
             </AlertDialogAction>
           </AlertDialogFooter>

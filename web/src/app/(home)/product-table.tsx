@@ -8,18 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import DeleteProductDialog from "./delete-product-dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MoreHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { TProduct } from "@/services/api/api";
 import { formatDate, formatNumberToCurrency } from "@/utils";
-import Link from "next/link";
+import { ProductTableItemMenu } from "@/app/(home)/components/product-table-item-menu";
+import { TProduct } from "@/schema/product";
 
 type ProductTableProps = {
   data: TProduct[];
@@ -52,21 +43,7 @@ export function ProductTable({ data }: ProductTableProps) {
                 : "sem atualização"}
             </TableCell>
             <TableCell className="text-right">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="p-0 w-8 h-8">
-                    <span className="sr-only">Open menu</span>
-                    <MoreHorizontal className="w-4 h-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DeleteProductDialog id={product.id} />
-                  <DropdownMenuItem>
-                    <Link href={`/product/${product.id}`}>Detalhes</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>Atualizar</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <ProductTableItemMenu product={product} />
             </TableCell>
           </TableRow>
         ))}
