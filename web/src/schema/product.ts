@@ -2,26 +2,13 @@ import { z } from "zod";
 
 export const productSchema = z.object({
   id: z.string(),
-  name: z.string({
-    required_error: "O nome é obrigatório",
-    invalid_type_error: "Nome inválido",
-  }),
-  price: z.number({
-    required_error: "O preço é obrigatório",
-    invalid_type_error: "preço inválido",
-  }),
-  description: z.string({
-    required_error: "A descrição é obrigatório",
-    invalid_type_error: "descrição inválida",
-  }),
-  createdAt: z.string({
-    required_error: "A descrição é obrigatório",
-    invalid_type_error: "descrição inválida",
-  }),
-  updatedAt: z.string({
-    required_error: "A descrição é obrigatório",
-    invalid_type_error: "descrição inválida",
-  }),
+  name: z.string().min(1, { message: "O nome é obrigatório" }),
+  price: z
+    .number()
+    .min(1, { message: "O preço é obrigatório e deve ser maior que zero" }),
+  description: z.string().min(1, { message: "A descrição é obrigatória" }),
+  createdAt: z.string(),
+  updatedAt: z.string(),
 });
 
 export const productErrorsToRecord = (
