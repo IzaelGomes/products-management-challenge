@@ -1,4 +1,4 @@
-import { TProduct } from "./api";
+import { TCreateProduct, TProduct } from "@/schema/product";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -27,16 +27,24 @@ export const getProduct = async (id: string) => {
   return data;
 };
 
-export const createProduct = async (product: TProduct) => {
-  await fetch(`${baseUrl}/product`, {
+export const createProduct = async (product: TCreateProduct) => {
+  await fetch(`${baseUrl}/product/`, {
     body: JSON.stringify(product),
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 };
 
-export const updateProduct = async (product: TProduct) => {
+export const updateProduct = async (
+  product: Omit<TProduct, "createdAt" | "updatedAt">
+) => {
   await fetch(`${baseUrl}/product/${product.id}`, {
     body: JSON.stringify(product),
     method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 };
