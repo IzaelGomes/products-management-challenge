@@ -2,7 +2,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -21,7 +20,6 @@ export function ProductFormCard() {
       <CardContent>
         <ProductForm action={createProductAction} />
       </CardContent>
-      <CardFooter className="flex justify-end"></CardFooter>
     </Card>
   );
 }

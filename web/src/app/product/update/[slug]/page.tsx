@@ -1,6 +1,5 @@
 import { getProduct } from "@/services/api/product";
-import ProductForm from "../../components/product-form";
-import { updateProductAction } from "@/actions/update-product-action";
+import { UpdateProductCard } from "./update-product-card";
 
 export default async function page({
   params,
@@ -11,8 +10,8 @@ export default async function page({
   const product = await getProduct(productId);
 
   return (
-    <div>
-      <ProductForm defaultData={product} action={updateProductAction} />
+    <div className="flex justify-center">
+      <UpdateProductCard data={product} />
     </div>
   );
 }

@@ -40,6 +40,13 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
     return null;
   };
 
+  const buttonSubmitText = () => {
+    if (defaultData) {
+      return isPending ? "Atualizando" : "Atualizar";
+    }
+    return isPending ? "Criando" : "Criar";
+  };
+
   return (
     <form action={formAction}>
       <input type="hidden" value={getDefaultValue("id")} name="id" />
@@ -84,7 +91,7 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
 
       <div className="flex justify-end mt-3">
         <Button disabled={isPending} type="submit">
-          {isPending ? "Criando" : "Criar"}
+          {buttonSubmitText()}
         </Button>
       </div>
     </form>
