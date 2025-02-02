@@ -3,7 +3,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -48,7 +47,6 @@ export function ProductTable({ data }: ProductTableProps) {
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter></TableFooter>
     </Table>
   );
 }
