@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Header } from "@/components/header";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
         >
           <Header />
           <div className="m-auto px-4 max-w-screen-xl">{children}</div>
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

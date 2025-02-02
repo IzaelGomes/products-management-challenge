@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
 import { TProduct } from "@/schema/product";
-import { useActionState } from "react";
+import generateProductInformation from "@/services/gemini";
+import { useActionState, useState } from "react";
 
 type Product = Pick<TProduct, "id" | "name" | "price" | "description">;
 
@@ -28,7 +30,9 @@ type ProductFormProps = {
 
 export default function ProductForm({ defaultData, action }: ProductFormProps) {
   const [state, formAction, isPending] = useActionState(action, null);
-
+  const [name, setName] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [preco, setPreco] = useState(0);
   const getDefaultValue = (key: keyof Product) => {
     if (state && "data" in state) return state.data?.[key];
 
@@ -47,6 +51,21 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
     return isPending ? "Criando" : "Criar";
   };
 
+  const handleGenerateProductInformation = async () => {
+    if (name) {
+      const productInformation = await generateProductInformation(name);
+
+      setDescricao(productInformation.descricao);
+      setPreco(productInformation.preco);
+      return;
+    }
+    toast({
+      title: "Atenção!",
+      description:
+        "Você precisa informar o nome do produto antes de gerar as informações.",
+    });
+  };
+
   return (
     <form action={formAction}>
       <input type="hidden" value={getDefaultValue("id")} name="id" />
@@ -55,7 +74,13 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
         <Label className="font-medium text-gray-700 text-sm" htmlFor="name">
           Nome
         </Label>
-        <Input name="name" id="name" defaultValue={getDefaultValue("name")} />
+        <Input
+          name="name"
+          id="name"
+          value={name}
+          defaultValue={getDefaultValue("name")}
+          onChange={(e) => setName(e.currentTarget.value)}
+        />
         {getError("name") && (
           <p className="text-red-500 text-sm">{getError("name")}</p>
         )}
@@ -69,7 +94,9 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
           name="price"
           type="number"
           id="price"
+          value={preco}
           className="max-w-[80px]"
+          onChange={(e) => setPreco(Number(e.currentTarget.value))}
           defaultValue={getDefaultValue("price")}
         />
         {getError("price") && (
@@ -82,6 +109,8 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
         <Textarea
           name="description"
           id="description"
+          value={descricao}
+          onChange={(e) => setDescricao(e.currentTarget.value)}
           defaultValue={getDefaultValue("description")}
         />
         {getError("description") && (
@@ -89,7 +118,10 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
         )}
       </div>
 
-      <div className="flex justify-end mt-3">
+      <div className="flex justify-end gap-4 mt-3">
+        <Button type="button" onClick={handleGenerateProductInformation}>
+          Gerar informações
+        </Button>
         <Button disabled={isPending} type="submit">
           {buttonSubmitText()}
         </Button>
