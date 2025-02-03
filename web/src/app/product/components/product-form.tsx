@@ -30,12 +30,12 @@ type ProductFormProps = {
 
 export default function ProductForm({ defaultData, action }: ProductFormProps) {
   const [state, formAction, isPending] = useActionState(action, null);
-  const [name, setName] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [preco, setPreco] = useState(0);
+  const [name, setName] = useState(defaultData?.name || "");
+  const [descricao, setDescricao] = useState(defaultData?.description || "");
+  const [preco, setPreco] = useState(defaultData?.price || 0);
+
   const getDefaultValue = (key: keyof Product) => {
     if (state && "data" in state) return state.data?.[key];
-
     return defaultData?.[key];
   };
 
@@ -78,7 +78,6 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
           name="name"
           id="name"
           value={name}
-          defaultValue={getDefaultValue("name")}
           onChange={(e) => setName(e.currentTarget.value)}
         />
         {getError("name") && (
@@ -97,7 +96,6 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
           value={preco}
           className="max-w-[80px]"
           onChange={(e) => setPreco(Number(e.currentTarget.value))}
-          defaultValue={getDefaultValue("price")}
         />
         {getError("price") && (
           <p className="text-red-500 text-sm">{getError("price")}</p>
@@ -111,7 +109,6 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
           id="description"
           value={descricao}
           onChange={(e) => setDescricao(e.currentTarget.value)}
-          defaultValue={getDefaultValue("description")}
         />
         {getError("description") && (
           <p className="text-red-500 text-sm">{getError("description")}</p>

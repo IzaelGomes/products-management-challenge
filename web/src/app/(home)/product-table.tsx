@@ -12,7 +12,7 @@ import { ProductTableItemMenu } from "@/app/(home)/components/product-table-item
 import { TProduct } from "@/schema/product";
 
 type ProductTableProps = {
-  data: TProduct[];
+  data?: TProduct[];
 };
 
 export function ProductTable({ data }: ProductTableProps) {
@@ -29,7 +29,7 @@ export function ProductTable({ data }: ProductTableProps) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((product) => (
+        {data?.map((product) => (
           <TableRow key={product.id}>
             <TableCell className="font-medium">{product.name}</TableCell>
             <TableCell className="font-medium">
