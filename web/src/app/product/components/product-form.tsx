@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { TProduct } from "@/schema/product";
 import generateProductInformation from "@/services/gemini";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 
 type Product = Pick<TProduct, "id" | "name" | "price" | "description">;
 
@@ -65,6 +65,26 @@ export default function ProductForm({ defaultData, action }: ProductFormProps) {
         "Você precisa informar o nome do produto antes de gerar as informações.",
     });
   };
+
+  useEffect(() => {
+    if (!state) return;
+
+    if ("data" in state) {
+      toast({
+        title: "Sucesso!",
+        description: defaultData
+          ? "Produto atualizado com sucesso."
+          : "Produto criado com sucesso.",
+      });
+    } else if ("error" in state) {
+      const errorMessage =
+        state.error?.message || "Ocorreu um erro ao processar o produto.";
+      toast({
+        title: "Erro!",
+        description: errorMessage,
+      });
+    }
+  }, [state, defaultData]);
 
   return (
     <form action={formAction}>
