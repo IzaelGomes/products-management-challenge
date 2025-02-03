@@ -7,8 +7,8 @@ type GetAllProductsUseCaseResponse = Product;
 export class GetAllProductsUseCase {
   constructor(private productRepository: ProductRepository) {}
 
-  async execute(): Promise<GetAllProductsUseCaseResponse[]> {
-    const products = await this.productRepository.findAll();
+  async execute(name?: string): Promise<GetAllProductsUseCaseResponse[]> {
+    const products = await this.productRepository.findAll(name);
 
     return products;
   }

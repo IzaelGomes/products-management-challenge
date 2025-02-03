@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { CreateProductUseCase } from 'src/modules/product/usecases/create-product.usecase';
 import { CreateProductDto } from './dtos/create-product.dto';
@@ -19,6 +20,7 @@ import {
   UpdateProductParamsDto,
 } from './dtos/update-product.dto';
 import { UpdateProductUseCase } from 'src/modules/product/usecases/update-product.usecase';
+import { GetProductsQueryParamsDto } from './dtos/get-products.dto';
 
 @Controller('product')
 export class ProductController {
@@ -35,8 +37,8 @@ export class ProductController {
   }
 
   @Get()
-  async getProducts() {
-    return await this.getAllProductsUseCase.execute();
+  async getProducts(@Query() queryParams: GetProductsQueryParamsDto) {
+    return await this.getAllProductsUseCase.execute(queryParams.name);
   }
 
   @Get('/:id')
