@@ -25,11 +25,13 @@ export function ProductDetailsCard({ data }: ProductDetailsCardProps) {
       <CardContent>
         <div>
           <label className="font-medium text-gray-700 text-sm">Nome:</label>
-          <p className="mt-1 text-gray-900 text-lg">{data.name}</p>
+          <p className="mt-1 text-gray-900 sm:text-sm md:text-lg">
+            {data.name}
+          </p>
         </div>
         <div>
           <label className="font-medium text-gray-700 text-sm">Preço:</label>
-          <p className="mt-1 text-gray-900 text-lg">
+          <p className="mt-1 text-gray-900 sm:text-sm md:text-lg">
             ${formatNumberToCurrency(data.price)}
           </p>
         </div>
@@ -37,14 +39,16 @@ export function ProductDetailsCard({ data }: ProductDetailsCardProps) {
           <label className="font-medium text-gray-700 text-sm">
             Descrição:
           </label>
-          <p className="mt-1 text-gray-900 text-lg">{data.description}</p>
+          <p className="mt-1 text-gray-900 sm:text-sm md:text-lg">
+            {data.description}
+          </p>
         </div>
-        <div className="flex justify-between gap-2">
+        <div className="flex flex-wrap justify-between gap-2">
           <div>
             <label className="font-medium text-gray-700 text-sm">
               Criado em:
             </label>
-            <p className="mt-1 text-gray-900 text-lg">
+            <p className="mt-1 text-gray-900 sm:text-sm md:text-lg">
               {formatDate(data.createdAt)}
             </p>
           </div>
@@ -52,7 +56,7 @@ export function ProductDetailsCard({ data }: ProductDetailsCardProps) {
             <label className="font-medium text-gray-700 text-sm">
               Atualizado em:
             </label>
-            <p className="mt-1 text-gray-900 text-lg">
+            <p className="mt-1 text-gray-900 sm:text-sm md:text-lg">
               {data.updatedAt ? formatDate(data.updatedAt) : "Sem atualização"}
             </p>
           </div>

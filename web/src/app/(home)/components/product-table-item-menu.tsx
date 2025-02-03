@@ -36,7 +36,7 @@ export const ProductTableItemMenu = ({
           </DropdownMenuItem>
 
           <DropdownMenuItem>
-            <Link href={`/product/${product.id}`}>Detalhes</Link>
+            <Link href={`/product/details/${product.id}`}>Detalhes</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href={`/product/update/${product.id}`}>Atualizar</Link>

@@ -9,6 +9,10 @@ export default async function page({
   const productId = (await params).slug;
   const product = await getProduct(productId);
 
+  if (!product) {
+    console.log("nentrou aqui");
+  }
+
   return (
     <div className="flex justify-center">
       <ProductDetailsCard data={product} />
