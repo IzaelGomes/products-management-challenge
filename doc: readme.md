@@ -104,6 +104,8 @@ O frontend estará rodando em [http://localhost:3000](http://localhost:3000) (ou
 - **NestJS**: Framework Node.js para construção de aplicações server-side eficientes e escaláveis.
 - **class-validator**: Biblioteca para validação de dados recebidos nas requisições, garantindo que os dados estejam corretos antes de serem processados.
 - **Docker**: Utilizado para containerizar o banco de dados, facilitando a configuração e o desenvolvimento em diferentes ambientes.
+- **PrismaOrm**: Utilizado para manipular o banco de dados.
+
 
 ### Frontend
 
