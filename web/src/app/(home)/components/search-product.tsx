@@ -3,30 +3,39 @@
 import { useQueryParams } from "@/hooks/useQueyParams";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRef } from "react";
+import { useActionState } from "react";
 
 export function SearchBar() {
-  const searchRef = useRef<HTMLInputElement>(null);
-  const { setQueryParam, removeQueryParam, getQueryParam } = useQueryParams();
-  const handleSearchProduct = () => {
-    if (searchRef.current?.value) {
-      setQueryParam("name", searchRef.current.value);
+  const { setQueryParam, removeQueryParam } = useQueryParams();
+
+  const handleSearch = (_prevState: unknown, formData: FormData) => {
+    const searchTerm = formData.get("search") as string;
+
+    if (searchTerm) {
+      setQueryParam("name", searchTerm);
     } else {
       removeQueryParam("name");
     }
+
+    return { search: searchTerm };
   };
 
+  const [state, searchProductAction, isPending] = useActionState(
+    handleSearch,
+    null
+  );
+
   return (
-    <div className="flex gap-3">
+    <form action={searchProductAction} className="flex gap-3">
       <Input
         type="text"
+        name="search"
         className="mb-4 max-w-sm"
         placeholder="Buscar produto"
         aria-label="Buscar produto"
-        defaultValue={getQueryParam("name")?.toString()}
-        ref={searchRef}
+        defaultValue={state?.search}
       />
-      <Button onClick={handleSearchProduct}>Buscar </Button>
-    </div>
+      <Button disabled={isPending}>Buscar </Button>
+    </form>
   );
 }
