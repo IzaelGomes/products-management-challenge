@@ -24,6 +24,14 @@ Siga os passos abaixo para rodar o projeto em sua máquina local.
 cd server
 ```
 
+### Adicione o arquivo .env:
+
+Crie um arquivo .env na pasta root server adicione a variável de ambiente.
+
+```env
+DATABASE_URL="postgresql://docker:docker@localhost:5432/productsmanegment?schema=public"
+```
+
 ### Instale as dependências:
 
 ```bash
@@ -60,6 +68,19 @@ O backend estará rodando em [http://localhost:3006](http://localhost:3006) ou s
 cd web
 ```
 
+### Adicione o arquivo .env.local:
+
+Crie um arquivo .env na pasta root e adicione as variáveis de ambiente.
+
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_bGlrZWQtbGFkeWJ1Zy01Ny5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY=sk_test_JCKumCZPx8THp2CdXqorw8v8LR87w3yN1xYIfEi6t9
+NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
+NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
+NEXT_PUBLIC_API_URL="http://localhost:3006"
+NEXT_PUBLIC_API_KEY_GEMINI_IA="AIzaSyBPgGoBlo8g6_ucgZkhULDW0DMSWfPznq0"
+```
+
 ### Instale as dependências:
 
 ```bash
@@ -73,29 +94,6 @@ npm run dev
 ```
 
 O frontend estará rodando em [http://localhost:3000](http://localhost:3000) (ou outra porta, dependendo da configuração).
-
----
-
----
-
-## Variáveis de Ambiente
-
-### Backend
-
-```env
-DATABASE_URL="postgresql://docker:docker@localhost:5432/productsmanegment?schema=public"
-```
-
-### Frontend
-
-```env
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_bGlrZWQtbGFkeWJ1Zy01Ny5jbGVyay5hY2NvdW50cy5kZXYk
-CLERK_SECRET_KEY=sk_test_JCKumCZPx8THp2CdXqorw8v8LR87w3yN1xYIfEi6t9
-NEXT_PUBLIC_CLERK_SIGN_IN_URL="/sign-in"
-NEXT_PUBLIC_CLERK_SIGN_UP_URL="/sign-up"
-NEXT_PUBLIC_API_URL="http://localhost:3006"
-NEXT_PUBLIC_API_KEY_GEMINI_IA="AIzaSyBPgGoBlo8g6_ucgZkhULDW0DMSWfPznq0"
-```
 
 ---
 
@@ -139,3 +137,4 @@ NEXT_PUBLIC_API_KEY_GEMINI_IA="AIzaSyBPgGoBlo8g6_ucgZkhULDW0DMSWfPznq0"
 - Optei por utilizar as ferramentas de **data fetching** do próprio Next.js, para buscar dados diretamente no lado do servidor. Isso melhora a performance e a segurança, evitando chamadas desnecessárias no cliente.
 - Para operações como atualizar e deletar produtos, utilizei **Server Actions** do Next.js. Essa abordagem permite que as operações sejam mantidas no lado do servidor, garantindo maior segurança e consistência dos dados e muitas vezes eliminando necessidades de bibliotecas adicionais para controle de http states.
 - Escolhir **não utilizar** bibliotecas como **SWR** ou **React Query**, pois as operações do projeto podiam ser mantidas no servidor, reduzindo a complexidade do cliente e mantendo a renderização da maior parte dos componentes no server side.
+- Decidi implementar a filtragem dos produtos no backend ao invés do frontend. Caso a lista de produtos cresça muito, filtrar diretamente no client-side pode causar uma queda de **performance**. Dessa forma, o backend é responsável por realizar a filtragem na base de dados, retornando ao frontend apenas os produtos que atendem aos critérios solicitados. Isso otimiza o tempo de resposta e reduz o uso de recursos no cliente.
