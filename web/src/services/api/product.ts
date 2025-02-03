@@ -1,4 +1,5 @@
 import { TCreateProduct, TProduct } from "@/schema/product";
+import { notFound } from "next/navigation";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -25,7 +26,8 @@ export const deleteProduct = async (id: string) => {
 
 export const getProduct = async (id: string) => {
   const product = await fetch(`${baseUrl}/product/${id}`);
-  const data = (await product.json()) as TProduct;
+  if (product.status !== 200) notFound();
+  const data: TProduct = await product.json();
 
   return data;
 };
