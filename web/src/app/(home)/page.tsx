@@ -11,7 +11,7 @@ export default async function Page({
   const query = (await searchParams).name;
 
   const products = await getProducts(query?.toString());
-  console.log("teste");
+
   return (
     <div>
       <div className="flex gap-2">
