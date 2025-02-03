@@ -32,7 +32,7 @@ export function ProductDetailsCard({ data }: ProductDetailsCardProps) {
         <div>
           <label className="font-medium text-gray-700 text-sm">Preço:</label>
           <p className="mt-1 text-gray-900 sm:text-sm md:text-lg">
-            ${formatNumberToCurrency(data.price)}
+            {formatNumberToCurrency(data.price)}
           </p>
         </div>
         <div>
